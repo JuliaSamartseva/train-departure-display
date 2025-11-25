@@ -40,7 +40,9 @@ def loadConfig():
         data["firstDepartureBold"] = False
     data["hoursPattern"] = re.compile("^((2[0-3]|[0-1]?[0-9])-(2[0-3]|[0-1]?[0-9]))$")
 
-    data["journey"]["departureStation"] = os.getenv("departureStation") or "PAD"
+    # --- CHANGE 1: Default to Kyiv ID instead of "PAD" ---
+    # 2200001 is Kyiv-Pas
+    data["journey"]["departureStation"] = "2200001"
 
     data["journey"]["destinationStation"] = os.getenv("destinationStation") or ""
     if data["journey"]["destinationStation"] == "null" or data["journey"]["destinationStation"] == "undefined":
@@ -50,12 +52,16 @@ def loadConfig():
     if os.getenv("individualStationDepartureTime", "").upper() == "TRUE":
         data["journey"]["individualStationDepartureTime"] = True
 
-    data["journey"]["outOfHoursName"] = os.getenv("outOfHoursName") or "London Paddington"
+    # --- CHANGE 2: Default name if data fails ---
+    # Changed from "London Paddington" to "Kyiv-Pas"
+    data["journey"]["outOfHoursName"] = "Kyiv-Pas"
+    
     data["journey"]["stationAbbr"] = {"International": "Intl."}
     data["journey"]['timeOffset'] = os.getenv("timeOffset") or "0"
     data["journey"]["screen1Platform"] = parsePlatformData(os.getenv("screen1Platform"))
     data["journey"]["screen2Platform"] = parsePlatformData(os.getenv("screen2Platform"))
 
+    # apiKey is ignored by your new trains.py, but we leave it here so main.py doesn't crash
     data["api"]["apiKey"] = os.getenv("apiKey") or None
     data["api"]["operatingHours"] = os.getenv("operatingHours") or ""
 
