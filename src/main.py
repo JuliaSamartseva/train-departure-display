@@ -211,7 +211,7 @@ def renderNRE(xOffset):
 
 def renderName(xOffset):
     def drawText(draw, *_):
-        text = "UK Train Departure Display"
+        text = "Ukrainian Railways"
         draw.text((int(xOffset), 0), text=text, font=fontBold, fill="yellow")
 
     return drawText
@@ -267,7 +267,7 @@ def drawStartup(device, width, height):
     virtualViewport = viewport(device, width=width, height=height)
 
     with canvas(device):
-        nameSize = int(fontBold.getlength("UK Train Departure Display"))
+        nameSize = int(fontBold.getlength("Ukraine Train Departure Display"))
         versionSize = int(font.getlength("v" + getVersionNumber().strip() + " " + getVersionDate()))
         poweredSize = int(fontBold.getlength("Powered by"))
         NRESize = int(fontBold.getlength("National Rail Enquiries"))
