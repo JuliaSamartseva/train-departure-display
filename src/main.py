@@ -80,7 +80,7 @@ def renderPlatform(departure):
 
 
 def renderCallingAt(draw, *_):
-    stations = "Calling at: "
+    stations = "Route: "
     _, _, bitmap = cachedBitmapText(stations, font)
     draw.bitmap((0, 0), bitmap, fill="yellow")
 
