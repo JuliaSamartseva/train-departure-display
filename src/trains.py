@@ -80,19 +80,6 @@ def process_uz_data(json_data, journeyConfig):
         else:
             departure["expected_departure_time"] = "On time"
 
-        # --- C. DESTINATION ---
-        route = item.get('route', '')
-        
-        # Clean up route string
-        if ' - ' in route:
-            departure["destination_name"] = route.split(' - ')[-1]
-        elif u'\u2192' in route: 
-            departure["destination_name"] = route.split(u'\u2192')[-1].strip()
-        elif '->' in route:
-            departure["destination_name"] = route.split('->')[-1].strip()
-        else:
-            departure["destination_name"] = route
-
         # --- D. PLATFORM ---
         plat = item.get('platform')
         if plat:
@@ -114,8 +101,7 @@ def process_uz_data(json_data, journeyConfig):
 
         # --- G. CALLING POINTS ---
         departure["calling_at_list"] = joinWithSpaces(
-            f"Train {train_num} to {departure['destination_name']}.",
-            f"Route: {route}.",
+            f"Train {train_num} to {departure['destination_name']}. ",
             "Ukrainian Railways."
         )
 
